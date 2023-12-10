@@ -8,8 +8,8 @@ totalHeight = 45; // hauteur totale (mm)
 frontZoneWidth = 274; // largeur de la zone avant (mm)
 // hauteur totale (mm)
 hasBottom = true;        // avec un fond ou non
-bottomThickness = 3;     // épaisseur du fond (mm)
-borderThickness = 3;     // épaisseur des bords (mm)
+bottomThickness = 1;     // épaisseur du fond (mm)
+borderThickness = 1;     // épaisseur des bords (mm)
 //Variables pour les compartiments
 headbandCompartimentSize = 150; // taille (diametre) du compartiment pour le bandeau (mm)
 frontNotchWidth = (totalWidth - frontZoneWidth) / 2;//largeur des encoches de la zone reserré à l'avant
@@ -18,14 +18,9 @@ module drawQuadrilateralFrame(width, depth, height, useBottom) {difference() {cu
     translate([borderThickness, borderThickness, useBottom ? bottomThickness : 0]) {cube([width - 2 * borderThickness,
             depth - 2 * borderThickness, height]);}}}
 
-
-module drawCylindricFrame(diameter, borderThickness, borderHeight) {difference() {cylinder(h = borderHeight, d =
-diameter);
-    cylinder(h = borderHeight, d = diameter - borderThickness);}}
-
 module drawHeadbandFrame(diameter, borderThickness, borderHeight) {difference() {cylinder(h = borderHeight, d = diameter
 );
-    cylinder(h = borderHeight, d = diameter - borderThickness);
+    cylinder(h = borderHeight, d = diameter - borderThickness*3);
     translate([- diameter / 2, - diameter / 2, 0]) {cube([diameter / 2, diameter / 2, borderHeight], center = false);}}
 
 }
@@ -57,10 +52,10 @@ module drawFrontFrame() {
     translate([totalWidth / 2, headbandCompartimentSize / 2, 0]) {drawHeadbandFrame(headbandCompartimentSize,
     borderThickness, totalHeight);}
 
-    translate([0, 197, 0]) {horizontalSeparator(70);}
-    translate([67, 180, 0]) {horizontalSeparator(216);}
-    translate([215, 90, 0]) {horizontalSeparator(70);}
-    translate([175, 140, 0]) {verticalSeparator(120);}
+    translate([0, 197, 0]) {horizontalSeparator(67);}
+    translate([67, 180, 0]) {horizontalSeparator(217);}
+    translate([215, 90, 0]) {horizontalSeparator(69);}
+    translate([175, 141, 0]) {verticalSeparator(119);}
     translate([67, 0, 0]) {verticalSeparator(frontZoneDepth);}}
 
 module drawBackFrame() {//main Back frame
